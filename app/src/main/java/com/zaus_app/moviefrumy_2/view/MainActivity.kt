@@ -1,7 +1,8 @@
-package com.zaus_app.moviefrumy_2
+package com.zaus_app.moviefrumy_2.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.zaus_app.moviefrumy_2.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
