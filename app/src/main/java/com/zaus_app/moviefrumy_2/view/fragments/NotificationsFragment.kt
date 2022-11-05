@@ -5,18 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.zaus_app.moviefrumy_2.R
-import com.zaus_app.moviefrumy_2.databinding.FragmentFavoritesBinding
+import com.zaus_app.moviefrumy_2.databinding.FragmentNotificationsBinding
 
-class FavoritesFragment : Fragment() {
-    private var _binding: FragmentFavoritesBinding? = null
+class NotificationsFragment : Fragment() {
+    private var _binding: FragmentNotificationsBinding? = null
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
