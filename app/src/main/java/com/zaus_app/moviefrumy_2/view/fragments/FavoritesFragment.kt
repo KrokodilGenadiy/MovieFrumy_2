@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.zaus_app.moviefrumy_2.R
 import com.zaus_app.moviefrumy_2.databinding.FragmentFavoritesBinding
+import com.zaus_app.moviefrumy_20.utils.AnimationHelper
 
 class FavoritesFragment : Fragment() {
     private var _binding: FragmentFavoritesBinding? = null
@@ -18,6 +19,11 @@ class FavoritesFragment : Fragment() {
     ): View {
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.favoritesFragmentRoot, requireActivity(), 2)
     }
 
     override fun onDestroyView() {

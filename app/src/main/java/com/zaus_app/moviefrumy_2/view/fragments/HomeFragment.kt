@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zaus_app.moviefrumy_2.R
 import com.zaus_app.moviefrumy_2.databinding.FragmentHomeBinding
 import com.zaus_app.moviefrumy_2.domain.Film
+import com.zaus_app.moviefrumy_20.utils.AnimationHelper
 import com.zaus_app.moviefrumy_20.view.rv_adaptes.FilmAdapter
 import com.zaus_app.moviefrumy_20.view.rv_adaptes.FilmDiff
 import com.zaus_app.moviefrumy_20.view.rv_adaptes.TopSpacingItemDecoration
@@ -48,6 +49,7 @@ class HomeFragment : Fragment() {
             addItemDecoration(decorator)
         }
         updateData(filmsDataBase)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
     }
 
     private fun updateData(newList: List<Film>){

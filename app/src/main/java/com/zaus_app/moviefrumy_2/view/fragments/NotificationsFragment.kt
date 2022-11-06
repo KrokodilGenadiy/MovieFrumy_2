@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.zaus_app.moviefrumy_2.databinding.FragmentNotificationsBinding
+import com.zaus_app.moviefrumy_20.utils.AnimationHelper
+import com.zaus_app.moviefrumy_20.view.rv_adaptes.TopSpacingItemDecoration
 
 class NotificationsFragment : Fragment() {
     private var _binding: FragmentNotificationsBinding? = null
@@ -18,6 +21,11 @@ class NotificationsFragment : Fragment() {
     ): View {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.notificationFragmentRoot, requireActivity(), 3)
     }
 
     override fun onDestroyView() {
