@@ -1,4 +1,4 @@
-package com.zaus_app.moviefrumy_2.view.fragments
+package com.zaus_app.moviefrumy_2.view.fragments.home_fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zaus_app.moviefrumy_2.R
@@ -19,6 +20,13 @@ import com.zaus_app.moviefrumy_20.view.rv_adaptes.TopSpacingItemDecoration
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: HomeFragmentViewModel by viewModels()
+    private var filmsDataBase = listOf<Film>()
+        set(value) {
+            if (field == value) return
+            field = value
+            updateData(field)
+        }
     private val filmsAdapter by lazy {
         FilmAdapter(object : FilmAdapter.OnItemClickListener {
             override fun click(position: Int) {
@@ -26,11 +34,6 @@ class HomeFragment : Fragment() {
             }
         })
     }
-    private val filmsDataBase = listOf<Film>(Film("Title", R.drawable.error_image,"description",2.0, false),
-        Film("Title", R.drawable.error_image,"description",2.0, false),
-        Film("Title", R.drawable.error_image,"description",2.0, false),
-        Film("Title", R.drawable.error_image,"description",2.0, false),
-        Film("Title", R.drawable.error_image,"description",2.0, false))
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +51,9 @@ class HomeFragment : Fragment() {
             val decorator = TopSpacingItemDecoration(8)
             addItemDecoration(decorator)
         }
-        updateData(filmsDataBase)
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner) {
+            filmsDataBase = it
+        }
         AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
     }
 

@@ -1,6 +1,8 @@
 package com.zaus_app.moviefrumy_20.view.rv_viewholders
 
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.zaus_app.moviefrumy_2.data.ApiConstants
 import com.zaus_app.moviefrumy_2.databinding.FilmItemBinding
 import com.zaus_app.moviefrumy_2.domain.Film
 
@@ -20,7 +22,10 @@ class FilmViewHolder(binding: FilmItemBinding, clickAtPosition: (Int) -> Unit) :
 
     fun bind(film: Film) {
         title.text = film.title
-        poster.setImageResource(film.poster)
+        Glide.with(itemView)
+            .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
+            .centerCrop()
+            .into(poster)
         description.text = film.description
         ratingDonut.setProgress((film.rating * 10).toInt())
         ratingDonut.animateProgress()
