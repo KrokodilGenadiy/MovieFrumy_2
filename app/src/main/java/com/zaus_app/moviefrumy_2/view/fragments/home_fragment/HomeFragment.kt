@@ -7,28 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DiffUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.zaus_app.moviefrumy_2.R
 import com.zaus_app.moviefrumy_2.databinding.FragmentHomeBinding
-import com.zaus_app.moviefrumy_2.domain.Film
 import com.zaus_app.moviefrumy_20.utils.AnimationHelper
-import com.zaus_app.moviefrumy_20.view.rv_adaptes.FilmAdapter
-import com.zaus_app.moviefrumy_20.view.rv_adaptes.FilmDiff
+import com.zaus_app.moviefrumy_20.view.rv_adaptes.FilmsAdapter
 import com.zaus_app.moviefrumy_20.view.rv_adaptes.TopSpacingItemDecoration
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeFragmentViewModel by viewModels()
-    private var filmsDataBase = listOf<Film>()
-        set(value) {
-            if (field == value) return
-            field = value
-            updateData(field)
-        }
     private val filmsAdapter by lazy {
-        FilmAdapter(object : FilmAdapter.OnItemClickListener {
+        FilmsAdapter(object : FilmsAdapter.OnItemClickListener {
             override fun click(position: Int) {
                Toast.makeText(requireContext(),position.toString(),Toast.LENGTH_LONG).show()
             }
@@ -51,18 +44,16 @@ class HomeFragment : Fragment() {
             val decorator = TopSpacingItemDecoration(8)
             addItemDecoration(decorator)
         }
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner) {
-            filmsDataBase = it
-        }
         AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
+        getFilms()
     }
 
-    private fun updateData(newList: List<Film>){
-        val oldList = filmsAdapter.getItems()
-        val productDiff = FilmDiff(oldList,newList)
-        val diffResult = DiffUtil.calculateDiff(productDiff)
-        filmsAdapter.setItems(newList)
-        diffResult.dispatchUpdatesTo(filmsAdapter)
+    private fun getFilms() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.getMovies().collectLatest { movies ->
+                filmsAdapter.submitData(movies)
+            }
+        }
     }
 
     override fun onDestroyView() {
