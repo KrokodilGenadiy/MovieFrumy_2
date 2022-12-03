@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.zaus_app.moviefrumy_2.databinding.FilmItemBinding
-import com.zaus_app.moviefrumy_2.domain.Film
+import com.zaus_app.moviefrumy_2.data.entity.Film
 import com.zaus_app.moviefrumy_2.view.rv_adaptes.FilmDiffCallBack
 import com.zaus_app.moviefrumy_20.view.rv_viewholders.FilmViewHolder
 

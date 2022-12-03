@@ -1,6 +1,6 @@
 package com.zaus_app.moviefrumy_2.utils
 
-import com.zaus_app.moviefrumy_2.domain.Film
+import com.zaus_app.moviefrumy_2.data.entity.Film
 import com.zaus_app.moviefrumy_20.data.entity.TmdbFilm
 
 object Converter {

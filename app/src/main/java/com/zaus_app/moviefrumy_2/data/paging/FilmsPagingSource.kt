@@ -1,7 +1,8 @@
-package com.zaus_app.moviefrumy_2.domain
+package com.zaus_app.moviefrumy_2.data.paging
 
 import androidx.paging.*
-import com.christopher_elias.features.movies.data.data_source.FilmsRemoteDataSource
+import com.zaus_app.moviefrumy_2.data.entity.Film
+import com.zaus_app.moviefrumy_2.domain.Interactor
 import com.zaus_app.moviefrumy_2.utils.Converter
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException

@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zaus_app.moviefrumy_2.data.ApiConstants
 import com.zaus_app.moviefrumy_2.databinding.FilmItemBinding
-import com.zaus_app.moviefrumy_2.domain.Film
+import com.zaus_app.moviefrumy_2.data.entity.Film
 
 
 class FilmViewHolder(binding: FilmItemBinding, clickAtPosition: (Int) -> Unit) : RecyclerView.ViewHolder(binding.root) {
